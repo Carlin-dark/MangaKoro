@@ -18,7 +18,7 @@ Você pode baixar a versão mais recente diretamente na nossa [página de Releas
 *   **MangaKoro.exe (Arquivo Único):** É o formato mais prático. Basta baixar e dar dois cliques para abrir, sem precisar instalar nada. O único detalhe é que ele pode demorar uns 2 ou 3 segundinhos a mais para carregar na primeira vez.
 *   **MangaKoro.zip (Pasta Completa):** É um arquivo compactado com o sistema completo. A grande vantagem é que o aplicativo abre mais rápido. Porém, você precisa extrair a pasta no seu computador e **nunca** separar o `.exe` dos outros arquivos que vêm junto com ele.
 
-** Encontrou algum erro?** Como estamos em fase Beta, o seu feedback é fundamental! Se o aplicativo fechar sozinho, alguma imagem não carregar ou se você tiver ideias para melhorar o app, sinta-se à vontade para abrir uma *Issue* no repositório ou mandar mensagem no nosso Discord.
+**Encontrou algum erro?** Como estamos em fase Beta, o seu feedback é fundamental! Se o aplicativo fechar sozinho, alguma imagem não carregar ou se você tiver ideias para melhorar o app, sinta-se à vontade para abrir uma *Issue* no repositório ou mandar mensagem no nosso Discord.
 
 ##  Como Instalar e Executar
 
