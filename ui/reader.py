@@ -4,12 +4,11 @@ import logging
 import qtawesome as qta
 
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtGui import QPixmap, QIcon
+from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QComboBox, QHBoxLayout, QLabel, QMainWindow, QPushButton, QScrollArea, QSpinBox, QVBoxLayout, QWidget
 
 from api.client import MangaDexClient
 from utils.cache import image_bytes
-
 
 class PageWorker(QThread):
     loaded = pyqtSignal(list)
@@ -28,7 +27,6 @@ class PageWorker(QThread):
             logging.exception("Falha ao carregar páginas do capítulo %s", self.chapter_id)
             self.failed.emit(str(exc))
 
-
 class ImageWorker(QThread):
     loaded = pyqtSignal(list)
 
@@ -43,7 +41,6 @@ class ImageWorker(QThread):
             logging.exception("Falha ao baixar imagens do leitor")
             self.loaded.emit([])
 
-
 class ReaderWindow(QMainWindow):
     def __init__(self, manga: dict, chapter: dict, chapters: list[dict], database):
         super().__init__()
@@ -53,7 +50,6 @@ class ReaderWindow(QMainWindow):
         self.setWindowTitle(f"MangaKoro Leitor: {manga['title']} - Cap. {chapter['chapter']}")
         self.resize(1200, 900)
         
-        # Styleshoot específico para o leitor, priorizando foco no conteúdo
         self.setStyleSheet("""
             QMainWindow { background: #030712; } 
             QLabel { color: #f3f4f6; }
@@ -129,14 +125,27 @@ class ReaderWindow(QMainWindow):
         self.page_host = QWidget()
         self.pages_layout = QVBoxLayout(self.page_host)
         self.pages_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-        self.pages_layout.setSpacing(10) # Espaço entre as páginas
+        self.pages_layout.setSpacing(10)
         self.scroll.setWidget(self.page_host)
         
         layout.addWidget(self.scroll)
 
         self.setCentralWidget(root)
         self.worker = None
+        
+        # Habilita o foco para capturar teclas
+        self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.load_pages()
+
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key.Key_Left:
+            self.previous_page()
+        elif event.key() == Qt.Key.Key_Right:
+            self.next_page()
+        elif event.key() == Qt.Key.Key_Escape:
+            self.close()
+        else:
+            super().keyPressEvent(event)
 
     def load_pages(self):
         self.statusBar().setStyleSheet("background: #111827; color: #9ca3af;")
@@ -151,7 +160,7 @@ class ReaderWindow(QMainWindow):
 
     def show_pages(self, urls: list[str]):
         if not urls:
-            self.statusBar().showMessage("Falha: Nenhuma imagem encontrada no servidor para este capítulo.")
+            self.statusBar().showMessage("Falha: Nenhuma imagem encontrada no servidor.")
             return
         self.statusBar().showMessage(f"Iniciando download de {len(urls)} páginas...")
         self.image_worker = ImageWorker(urls)
@@ -163,15 +172,27 @@ class ReaderWindow(QMainWindow):
         self.page_index = 0
         self.render_pages()
         self.database.add_history(self.chapter, self.manga)
-        self.statusBar().showMessage(f"Sucesso! {len(images)} páginas carregadas e prontas.")
+        self.statusBar().showMessage(f"Sucesso! {len(images)} páginas carregadas. (Use as setas ←/→ para navegar)")
 
     def render_pages(self):
         if not hasattr(self, "images"):
             return
+            
+        # Correção do bug de duplicação
         while self.pages_layout.count():
             item = self.pages_layout.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            else:
+                layout = item.layout()
+                if layout is not None:
+                    while layout.count():
+                        sub_item = layout.takeAt(0)
+                        sub_widget = sub_item.widget()
+                        if sub_widget is not None:
+                            sub_widget.deleteLater()
+                    layout.deleteLater()
 
         width = max(300, int(self.scroll.viewport().width() * self.zoom.value() / 100))
         if self.mode.currentIndex() == 0: # Vertical Scroll
