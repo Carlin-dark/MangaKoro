@@ -71,7 +71,7 @@ python3 main.py
 # Armazenamento de Dados
 Para garantir a sua privacidade e um carregamento rápido, o MangaKoro opera de forma offline-first para as suas preferências.
 
-Nota de Privacidade: Todos os seus dados de salvamento, histórico de leitura, cache de imagens e configurações gerais ficam armazenados localmente e de forma segura na sua máquina, no seguinte diretório: ~/.mangakoro.
+Nota de Privacidade: Todos os seus dados de salvamento, histórico de leitura, cache de imagens e configurações gerais ficam armazenados localmente e de forma segura na pasta pessoal de cada usuário, dentro do diretório `.mangalume`. No Windows, o caminho é `%USERPROFILE%\\.mangalume`; no Linux e macOS, `~/.mangalume`.
 
 🛠️ Tecnologias Utilizadas
 * [Python 3.10+](https://www.python.org/)
