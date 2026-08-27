@@ -2,8 +2,6 @@
 
 O **MangaKoro** é um leitor desktop de mangás moderno, rápido e elegante, totalmente integrado à API v5 do MangaDex. Desenvolvido em Python 3.10+ com PyQt6, ele foi projetado para oferecer a melhor experiência de leitura diretamente no seu computador, com foco em desempenho e usabilidade.
 
----
-
 ##  Funcionalidades Principais
 
 * **Interface Moderna:** Design limpo com temas escuros amigáveis aos olhos e ícones nativos de alta qualidade.
@@ -11,7 +9,16 @@ O **MangaKoro** é um leitor desktop de mangás moderno, rápido e elegante, tot
 * **Leitor Altamente Customizável:** Adapte a leitura ao seu estilo com opções de rolagem vertical, página única ou dupla, controle de zoom e cores de fundo ajustáveis.
 * **Biblioteca Pessoal:** Sistema robusto de favoritos e histórico de leitura armazenados localmente para garantir sua privacidade.
 
----
+##  Download 
+
+Estas são verões de testes, o que significa que o aplicativo já está funcional e pronto para ser usado no seu PC, mas ainda estamos trabalhando para melhorar o desempenho e corrigir pequenos detalhes. 
+
+Você pode baixar a versão mais recente diretamente na nossa [página de Releases](https://github.com/Carlin-dark/MangaKoro/releases). Para facilitar a sua experiência no Windows, disponibilizamos duas opções de download:
+
+*   **MangaKoro.exe (Arquivo Único):** É o formato mais prático. Basta baixar e dar dois cliques para abrir, sem precisar instalar nada. O único detalhe é que ele pode demorar uns 2 ou 3 segundinhos a mais para carregar na primeira vez.
+*   **MangaKoro.zip (Pasta Completa):** É um arquivo compactado com o sistema completo. A grande vantagem é que o aplicativo abre mais rápido. Porém, você precisa extrair a pasta no seu computador e **nunca** separar o `.exe` dos outros arquivos que vêm junto com ele.
+
+** Encontrou algum erro?** Como estamos em fase Beta, o seu feedback é fundamental! Se o aplicativo fechar sozinho, alguma imagem não carregar ou se você tiver ideias para melhorar o app, sinta-se à vontade para abrir uma *Issue* no repositório ou mandar mensagem no nosso Discord.
 
 ##  Como Instalar e Executar
 
